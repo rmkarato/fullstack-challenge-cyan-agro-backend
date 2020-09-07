@@ -4,15 +4,10 @@ const express = require("express");
 const userRouter = require("./routes/userRouter")
 const connection = require("./database")
 
-//Testing DB
-connection.authenticate()
-    .then(() => console.log("Database connected."))
-    .catch(error => console.log("Error:" + error))
-
 const app = express();
 
 app.use(express.json());
-app.use(userRouter)
+app.use("/user", userRouter)
 
 app.get("/test", async (req: Request, res: Response) => {
     try {
@@ -21,6 +16,11 @@ app.get("/test", async (req: Request, res: Response) => {
       res.status(400).send("ERRO");
     }
 });
+
+//Testing DB
+connection.authenticate()
+    .then(() => console.log("Connection with database has been established successfully."))
+    .catch((error :any) => console.log("Unable to connect to the database:" + error))
   
 const server = app.listen(process.env.PORT || 3000, () => {
 if (server) {

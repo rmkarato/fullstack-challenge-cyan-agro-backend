@@ -1,10 +1,8 @@
-import { Request, Response } from "express";
 const express = require("express");
+const UserController = require("../controllers/UserController");
 
 const userRouter = express.Router();
 
-userRouter.get("/", (req: Request, res: Response) => {
-    return res.json({ hello: "World" });
-})
+userRouter.post("/signup", UserController.signup)
 
 module.exports = userRouter;
