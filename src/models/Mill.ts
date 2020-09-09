@@ -15,7 +15,7 @@ class Mill extends Model {
                 type: DataTypes.STRING,
                 unique: {
                     args: true,
-                    msg: 'Looks like you already have an mill with this name. Please try to login.',
+                    msg: 'Looks like you already have a mill with this name.',
                 },               
             },
         }, {
@@ -33,7 +33,7 @@ class Mill extends Model {
     }
 
     static associate(models: any) {
-        this.hasMany(models.Harvests, { foreignKey: 'mill_id', as: 'mill' });
+        this.hasMany(models.Harvest, { foreignKey: 'mill_id', as: 'Harvests' });
     }
 }
 

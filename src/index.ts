@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AddressInfo } from "net";
-const express = require("express");
+import express from "express";
 
 const userRouter = require("./routes/userRouter");
 const millsRouter = require("./routes/millsRouter");

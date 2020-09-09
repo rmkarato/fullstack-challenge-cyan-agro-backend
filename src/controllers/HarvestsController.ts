@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Authenticator } from "../services/Authenticator";
 
 const Harvest = require("../models/Harvest");
 const Mill = require("../models/Mill");
@@ -7,20 +8,24 @@ module.exports = {
     async registerHarvest (req: Request, res: Response) {
         try {
             const { mill_id } = req.params;
+            
             const { start_date, end_date } = req.body;
 
-            const token = req.headers.authorization as string;
+            const authenticator = new Authenticator();
+            const token = authenticator.getData(
+                req.headers.authorization as string
+            );
 
             const mill = await Mill.findByPk(mill_id);
 
-            if(!mill_id) {
+            if(!mill) {
                 return res.status(400).json({ error: "Mill not found."})
             }
 
             const harvest = await Harvest.create({
-                mill_id,
                 start_date,
-                end_date
+                end_date,
+                mill_id
             });
 
             res 
@@ -28,6 +33,7 @@ module.exports = {
                 .send({
                     message: "Harvest registered succesfully."
                 })
+                .json(harvest)
         } catch(error) {
             res
                 .status(400)

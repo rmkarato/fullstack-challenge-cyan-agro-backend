@@ -10,6 +10,13 @@ class Harvests extends Model {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
+            mill_id: {
+                allowNull: false,
+                type: DataTypes.UUID,
+                references: { model: 'Mills', key: 'id'},
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+            },
             start_date: {
                 allowNull: false,
                 type: DataTypes.DATEONLY,          
@@ -27,7 +34,7 @@ class Harvests extends Model {
     }
 
     static associate(models: any) {
-        this.belongsTo(models.Mills, { foreignKey: 'mill_id', as: 'mill' });
+        this.belongsTo(models.Mill, { foreignKey: 'mill_id', as: 'mill' });
     }
 }
 

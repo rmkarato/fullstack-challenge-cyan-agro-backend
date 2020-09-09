@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Authenticator } from "../services/Authenticator";
 
 const Mill = require("../models/Mill");
 
@@ -7,7 +8,10 @@ module.exports = {
         try {
             const { name } = req.body;
     
-            const token = req.headers.authorization as string;
+            const authenticator = new Authenticator();
+            const token = authenticator.getData(
+                req.headers.authorization as string
+            );
 
             await Mill.create({ name });
             
