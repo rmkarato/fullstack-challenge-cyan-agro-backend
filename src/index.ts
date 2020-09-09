@@ -6,6 +6,7 @@ const userRouter = require("./routes/userRouter");
 const millsRouter = require("./routes/millsRouter");
 const harvestsRouter = require("./routes/harvestsRouter");
 const farmsRouter = require("./routes/farmsRouter");
+const fieldsRouter = require("./routes/fieldsRouter");
 
 const connection = require("./database");
 
@@ -16,6 +17,7 @@ app.use("/user", userRouter);
 app.use("/mills", millsRouter);
 app.use("/harvests", harvestsRouter);
 app.use("/farms", farmsRouter);
+app.use("/fields", fieldsRouter);
 
 app.get("/test", async (req: Request, res: Response) => {
     try {

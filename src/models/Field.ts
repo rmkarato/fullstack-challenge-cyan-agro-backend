@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 require('dotenv').config();
 
-class Farm extends Model {
+class Field extends Model {
     static init(connection: any) {
         super.init({
             id: {
@@ -10,39 +10,28 @@ class Farm extends Model {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            harvest_id: {
+            farm_id: {
                 allowNull: false,
                 type: DataTypes.UUID,
                 references: { model: 'Harvests', key: 'id'},
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             },
-            name: {
+            gps_coordinates: {
                 allowNull: false,
-                type: DataTypes.STRING,
-                unique: {
-                    args: true,
-                    msg: 'Looks like you already have a farm with this name.',
-                },               
+                type: DataTypes.GEOMETRY('POINT'),     
             },
         }, {
-            indexes: [
-                {
-                unique: true, 
-                fields: ['name']
-                }
-            ],
             timestamps: true,
             freezeTableName: true,
             sequelize: connection,
-            tableName: "Farms"
-        });
+            tableName: "Fields"
+        })
     }
 
     static associate(models: any) {
-        this.belongsTo(models.Harvest, { foreignKey: 'harvest_id', as: 'harvest' });
-        this.hasMany(models.Field, { foreignKey: 'farm_id', as: 'Fields' });
+        this.belongsTo(models.Farm, { foreignKey: 'farm_id', as: 'farm' });
     }
 }
 
-module.exports = Farm;
+module.exports = Field;
