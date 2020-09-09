@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
 
-const User = require("../models/User")
+const User = require("../models/User");
 
 module.exports = {
     async signup (req: Request, res: Response) {

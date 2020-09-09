@@ -2,32 +2,38 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Harvests', { 
+    return queryInterface.createTable('Users', { 
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
-      mill_id: {
-        type: Sequelize.UUID,
+      name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: { model: 'Mills', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
-      start_date: {
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      end_date: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Harvests');
+    return queryInterface.dropTable('Users');
   }
 };

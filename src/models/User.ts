@@ -27,7 +27,11 @@ class User extends Model {
                     isEmail: {
                     msg: 'Email address must be valid'
                     }
-                }
+                },
+                unique: {
+                    args: true,
+                    msg: 'Looks like you already have an account with this email address. Please try to login.',
+                },
             },
             password: {
                 allowNull: false,
@@ -38,7 +42,12 @@ class User extends Model {
                 }
             },
         }, {
-            indexes: [{unique: true, fields: ['email']}],
+            indexes: [
+                {
+                unique: true, 
+                fields: ['email']
+                }
+            ],
             timestamps: true,
             freezeTableName: true,
             sequelize: connection,
