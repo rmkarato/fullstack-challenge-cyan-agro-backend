@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
 import { AddressInfo } from "net";
 const express = require("express");
+
 const userRouter = require("./routes/userRouter");
 const millsRouter = require("./routes/millsRouter");
+const harvestsRouter = require("./routes/harvestsRouter");
+
 const connection = require("./database");
 
 const app = express();
@@ -10,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use("/user", userRouter);
 app.use("/mills", millsRouter);
+app.use("/harvests", harvestsRouter);
 
 app.get("/test", async (req: Request, res: Response) => {
     try {

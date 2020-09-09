@@ -1,20 +1,15 @@
 import { Request, Response } from "express";
-import { Authenticator } from "../services/Authenticator";
 
 const Mill = require("../models/Mill");
 
 module.exports = {
     async registerMill (req: Request, res: Response) {
         try {
-            const token = req.headers.authorization as string;
-            console.log(token)
-
             const { name } = req.body;
-            console.log(req.body)
+    
+            const token = req.headers.authorization as string;
 
-            const mill = await Mill.create({
-                name
-            });
+            await Mill.create({ name });
             
             res
                 .status(200)

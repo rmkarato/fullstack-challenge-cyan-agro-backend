@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require("sequelize");
-import { Authenticator } from "../services/Authenticator";
 require('dotenv').config();
 
 class Mill extends Model {
@@ -30,14 +29,11 @@ class Mill extends Model {
             freezeTableName: true,
             sequelize: connection,
             tableName: "Mills"
-        })
+        });
+    }
 
-        const authenticator = new Authenticator();
-
-        Mill.prototype.generateToken = function generateToken() {
-            console.log('JWT:' + process.env.JWT_KEY)
-            return authenticator.generateToken({ id: this.id})
-        }
+    static associate(models: any) {
+        this.hasMany(models.Harvests, { foreignKey: 'mill_id', as: 'mill' });
     }
 }
 
