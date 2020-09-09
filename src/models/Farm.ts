@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 require('dotenv').config();
 
-class Harvest extends Model {
+class Farm extends Model {
     static init(connection: any) {
         super.init({
             id: {
@@ -10,33 +10,38 @@ class Harvest extends Model {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            mill_id: {
+            harvest_id: {
                 allowNull: false,
                 type: DataTypes.UUID,
-                references: { model: 'Mills', key: 'id'},
+                references: { model: 'Harvests', key: 'id'},
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             },
-            start_date: {
+            name: {
                 allowNull: false,
-                type: DataTypes.DATEONLY,          
-            },
-            end_date: {
-                allowNull: false,
-                type: DataTypes.DATEONLY,          
+                type: DataTypes.STRING,
+                unique: {
+                    args: true,
+                    msg: 'Looks like you already have a farm with this name.',
+                },               
             },
         }, {
+            indexes: [
+                {
+                unique: true, 
+                fields: ['name']
+                }
+            ],
             timestamps: true,
             freezeTableName: true,
             sequelize: connection,
-            tableName: "Harvests"
+            tableName: "Farms"
         });
     }
 
     static associate(models: any) {
-        this.belongsTo(models.Mill, { foreignKey: 'mill_id', as: 'mill' });
-        this.hasMany(models.Farm, { foreignKey: 'harvest_id', as: 'Farms' });
+        this.belongsTo(models.Harvest, { foreignKey: 'harvest_id', as: 'harvest' });
     }
 }
 
-module.exports = Harvest;
+module.exports = Farm;

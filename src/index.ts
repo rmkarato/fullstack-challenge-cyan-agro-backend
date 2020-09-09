@@ -5,6 +5,7 @@ import express from "express";
 const userRouter = require("./routes/userRouter");
 const millsRouter = require("./routes/millsRouter");
 const harvestsRouter = require("./routes/harvestsRouter");
+const farmsRouter = require("./routes/farmsRouter");
 
 const connection = require("./database");
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/user", userRouter);
 app.use("/mills", millsRouter);
 app.use("/harvests", harvestsRouter);
+app.use("/farms", farmsRouter);
 
 app.get("/test", async (req: Request, res: Response) => {
     try {
