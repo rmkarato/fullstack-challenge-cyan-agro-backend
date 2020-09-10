@@ -1,9 +1,9 @@
-export {};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const { Model, DataTypes } = require("sequelize");
 require('dotenv').config();
-
 class Mill extends Model {
-    static init(connection: any) {
+    static init(connection) {
         super.init({
             id: {
                 allowNull: false,
@@ -17,13 +17,13 @@ class Mill extends Model {
                 unique: {
                     args: true,
                     msg: 'Looks like you already have a mill with this name.',
-                },               
+                },
             },
         }, {
             indexes: [
                 {
-                unique: true, 
-                fields: ['name']
+                    unique: true,
+                    fields: ['name']
                 }
             ],
             timestamps: true,
@@ -32,10 +32,8 @@ class Mill extends Model {
             tableName: "Mills"
         });
     }
-
-    static associate(models: any) {
+    static associate(models) {
         this.hasMany(models.Harvest, { foreignKey: 'mill_id', as: 'Harvests' });
     }
 }
-
 module.exports = Mill;

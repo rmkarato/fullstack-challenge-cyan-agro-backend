@@ -1,9 +1,9 @@
-export {};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const { Model, DataTypes } = require("sequelize");
 require('dotenv').config();
-
-class Harvest extends Model {
-    static init(connection: any) {
+class Field extends Model {
+    static init(connection) {
         super.init({
             id: {
                 allowNull: false,
@@ -11,33 +11,26 @@ class Harvest extends Model {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            mill_id: {
+            farm_id: {
                 allowNull: false,
                 type: DataTypes.UUID,
-                references: { model: 'Mills', key: 'id'},
+                references: { model: 'Harvests', key: 'id' },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             },
-            start_date: {
+            gps_coordinates: {
                 allowNull: false,
-                type: DataTypes.DATEONLY,          
-            },
-            end_date: {
-                allowNull: false,
-                type: DataTypes.DATEONLY,          
+                type: DataTypes.GEOMETRY('POINT'),
             },
         }, {
             timestamps: true,
             freezeTableName: true,
             sequelize: connection,
-            tableName: "Harvests"
+            tableName: "Fields"
         });
     }
-
-    static associate(models: any) {
-        this.belongsTo(models.Mill, { foreignKey: 'mill_id', as: 'mill' });
-        this.hasMany(models.Farm, { foreignKey: 'harvest_id', as: 'Farms' });
+    static associate(models) {
+        this.belongsTo(models.Farm, { foreignKey: 'farm_id', as: 'farm' });
     }
 }
-
-module.exports = Harvest;
+module.exports = Field;

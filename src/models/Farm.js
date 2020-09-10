@@ -1,9 +1,9 @@
-export {};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const { Model, DataTypes } = require("sequelize");
 require('dotenv').config();
-
 class Farm extends Model {
-    static init(connection: any) {
+    static init(connection) {
         super.init({
             id: {
                 allowNull: false,
@@ -14,7 +14,7 @@ class Farm extends Model {
             harvest_id: {
                 allowNull: false,
                 type: DataTypes.UUID,
-                references: { model: 'Harvests', key: 'id'},
+                references: { model: 'Harvests', key: 'id' },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             },
@@ -24,13 +24,13 @@ class Farm extends Model {
                 unique: {
                     args: true,
                     msg: 'Looks like you already have a farm with this name.',
-                },               
+                },
             },
         }, {
             indexes: [
                 {
-                unique: true, 
-                fields: ['name']
+                    unique: true,
+                    fields: ['name']
                 }
             ],
             timestamps: true,
@@ -39,11 +39,9 @@ class Farm extends Model {
             tableName: "Farms"
         });
     }
-
-    static associate(models: any) {
+    static associate(models) {
         this.belongsTo(models.Harvest, { foreignKey: 'harvest_id', as: 'harvest' });
         this.hasMany(models.Field, { foreignKey: 'farm_id', as: 'Fields' });
     }
 }
-
 module.exports = Farm;

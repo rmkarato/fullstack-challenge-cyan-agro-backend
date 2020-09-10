@@ -1,3 +1,4 @@
+export {};
 const { Model, DataTypes } = require("sequelize");
 import { Authenticator } from "../services/Authenticator";
 import * as bcrypt from "bcryptjs";
