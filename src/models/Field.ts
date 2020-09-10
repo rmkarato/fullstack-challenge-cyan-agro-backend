@@ -1,3 +1,4 @@
+export {};
 const { Model, DataTypes } = require("sequelize");
 require('dotenv').config();
 
