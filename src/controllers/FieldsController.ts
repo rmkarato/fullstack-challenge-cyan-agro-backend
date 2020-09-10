@@ -8,16 +8,14 @@ module.exports = {
     async registerField (req: Request, res: Response) {
         try {
             const { farm_id } = req.params;
-            
-            const { gps_coordinates } = req.body;
 
             const authenticator = new Authenticator();
             const token = authenticator.getData(
                 req.headers.authorization as string
             );
-           
-            const point = { type: 'Point', coordinates: [-44.10205, -31.52158]};
             
+            const point = { type: 'Point', coordinates: req.body.gps_coordinates };
+
             const farm = await Farm.findByPk(farm_id);
 
             if(!farm) {
@@ -46,6 +44,11 @@ module.exports = {
 
     async getAllFields (req: Request, res: Response) {
         try {
+            const authenticator = new Authenticator();
+            const token = authenticator.getData(
+                req.headers.authorization as string
+            );
+
             const fields = await Field.findAll();
 
             return res.json(fields)

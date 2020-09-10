@@ -31,6 +31,11 @@ module.exports = {
 
     async getAllMills (req: Request, res: Response) {
         try {
+            const authenticator = new Authenticator();
+            const token = authenticator.getData(
+                req.headers.authorization as string
+            );
+            
             const mills = await Mill.findAll();
             
             return res.json(mills)
