@@ -44,6 +44,11 @@ module.exports = {
 
     async getAllHarvests (req: Request, res: Response) {
         try {
+            const authenticator = new Authenticator();
+            const token = authenticator.getData(
+                req.headers.authorization as string
+            );
+            
             const harvests = await Harvest.findAll();
 
             return res.json(harvests)

@@ -16,15 +16,9 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      latitude: {
-        type: Sequelize.DECIMAL,
+      gps_coordinates: {
+        type: Sequelize.GEOMETRY('POINT'),
         allowNull: false,
-        unique: true,
-      },
-      longitude: {
-        type: Sequelize.DECIMAL,
-        allowNull: false,
-        unique: true,
       },
       created_at: {
         type: Sequelize.DATE,

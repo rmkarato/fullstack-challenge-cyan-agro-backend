@@ -43,6 +43,11 @@ module.exports = {
 
     async getAllFarms (req: Request, res: Response) {
         try {
+            const authenticator = new Authenticator();
+            const token = authenticator.getData(
+                req.headers.authorization as string
+            );
+            
             const farms = await Farm.findAll();
             
             return res.json(farms)
