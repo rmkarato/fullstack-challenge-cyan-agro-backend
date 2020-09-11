@@ -18,13 +18,13 @@
 
 <p align="justify"> - Na área privada - somente usuário com e-mail e senha terá acesso, o administrador poderá listar todas as Usinas, Colheitas, Fazendas e Talhões cadastrados. Além disso, também poderá cadastrar novos registros.</p>
 
-##Instruções Para Rodar
+## Instruções Para Rodar
 
  <p align="justify"> 1. npm install para instalar todas as dependências; </p>
 <p align="justify"> 2. npm run start para rodar localmente o projeto;</p>
 <p align="justify"> 3. npm run build para gerar uma versão estática do projeto (que ficará na pasta "build").</p>
 
-##Documentação para testes 
+## Documentação para testes 
 
 <p align="justify"> https://documenter.getpostman.com/view/11588513/TVCjwQv5 </p>
 
