@@ -32,7 +32,7 @@ connection.authenticate()
     .then(() => console.log("Connection with database has been established successfully."))
     .catch((error :any) => console.log("Unable to connect to the database:" + error))
   
-const server = app.listen(process.env.PORT || 3000, () => {
+const server = app.listen(process.env.PORT || 3003, () => {
 if (server) {
     const address = server.address() as AddressInfo;
     console.log(`Server is running in http://localhost:${address.port}`);
