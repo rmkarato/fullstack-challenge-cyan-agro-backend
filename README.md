@@ -2,11 +2,11 @@
 
 > Status do Projeto: Em desenvolvimento
 
-##Stack
+## Stack
 
 <p align="justify"> Este é um projeto de backend feito utilizando NodeJs, Express, Typescrip, Javascript, Sequelize e Postgres.</p>
 
-##Sobre
+## Sobre
 
 <p align="justify"> Projeto de backend realizado para um desafio proposto pela empresa Cyan Agronalytics. Consiste em um banco de dados de registro de unidades de usinas de cana-de-açúcar. </p>
 
