@@ -2,25 +2,29 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Harvests', { 
+    return queryInterface.createTable('Farms', { 
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
-      mill_id: {
+      harvest_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        references: { model: 'Mills', key: 'id'},
+        references: { model: 'Harvests', key: 'id'},
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      start_date: {
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      end_date: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       }
@@ -28,6 +32,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Harvests');
+    return queryInterface.dropTable('Farms');
   }
 };
